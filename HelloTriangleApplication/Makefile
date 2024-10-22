@@ -1,18 +1,14 @@
 CFLAGS = -std=c++17 -O2
 LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
-SOURCES = main.cpp HelloTriangleApplication.cpp VulkanUtils.cpp QueueFamilyIndices.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE = triangle
+TARGET = triangle
 
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS)
-	g++ $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-%.o: %.cpp
-	g++ $(CFLAGS) -c $< -o $@
+$(TARGET): *.cpp *.h
+	g++ $(CFLAGS) -o $(TARGET) *.cpp $(LDFLAGS)
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	rm -f $(TARGET)
 
-.PHONY: all clean
+test: 
+	./triangle
+
+.PHONY: clean test

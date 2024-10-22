@@ -13,6 +13,9 @@ private:
     GLFWwindow* window;
     VkInstance instance;
     VkDebugUtilsMessengerEXT debugMessenger;
+    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;   // physical device
+    VkDevice device;                                    // logical device
+    VkQueue graphicsQueue;
 
     void initWindow();
     void initVulkan();
@@ -21,10 +24,10 @@ private:
     void pickPhysicalDevice();
     void mainLoop();
     void cleanup();
+    void createLogicalDevice();
 
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
     std::vector<const char*> getRequiredExtensions();
-
 };
